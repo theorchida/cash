@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<cs50.h>
+#include<math.h>
+
+int main(void)
+{
+    float input;
+//to take ip again
+prompt:
+    input = get_float("Change owed: ");
+    int c = 0;
+//rounding off to to make it int and use modulo
+    int n = round((input) * 100);
+
+    if (n == 0)
+    {
+        printf("0\n");
+    }
+    else if (n > 0)
+    {
+        //cents and dollars
+        int cents = n % 100;
+        //dollars into coins
+        c = 4 * ((n - cents) / 100);
+
+        if (cents == 0)
+        {
+            printf("%d\n", c);
+        }
+        //cent to coins
+        else
+        {
+            //quarters
+            while (cents - 25 >= 0)
+            {
+                cents = cents - 25;
+                c++;
+            }
+            //dimes
+            while (cents - 10 >= 0)
+            {
+                cents = cents - 10;
+                c++;
+            }
+            //nickels
+            while (cents - 5 >= 0)
+            {
+                cents = cents - 5;
+                c++;
+            }
+            //pennies
+            while (cents - 1 >= 0)
+            {
+                cents = cents - 1;
+                c++;
+            }
+            printf("%d\n", c);
+        }
+    }
+    else
+    {
+        goto prompt;
+    }
+}
